@@ -28,6 +28,8 @@
 #include <linux/xattr.h>
 #include <linux/exportfs.h>
 
+#define WRAPFS_SUPER_MAGIC	0xb550ca10
+
 /* the file system name */
 #define WRAPFS_NAME "wrapfs"
 
@@ -62,6 +64,7 @@ extern struct inode *wrapfs_iget(struct super_block *sb,
 extern int wrapfs_interpose(struct dentry *dentry, struct super_block *sb,
 			    struct path *lower_path);
 
+extern int vfs_path_lookup(struct dentry *, struct vfsmount *, const char *, unsigned int, struct path *);
 /* file private data */
 struct wrapfs_file_info {
 	struct file *lower_file;

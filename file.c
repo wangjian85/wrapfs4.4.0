@@ -20,6 +20,7 @@ static ssize_t wrapfs_read(struct file *file, char __user *buf,
 
 	lower_file = wrapfs_lower_file(file);
 	err = vfs_read(lower_file, buf, count, ppos);
+	pr_info("this is wrapfs_read \n");
 	/* update our inode atime upon a successful lower read */
 	if (err >= 0)
 		fsstack_copy_attr_atime(d_inode(dentry),
@@ -35,6 +36,8 @@ static ssize_t wrapfs_write(struct file *file, const char __user *buf,
 
 	struct file *lower_file;
 	struct dentry *dentry = file->f_path.dentry;
+
+	pr_info("this is wrapfs_write \n");
 
 	lower_file = wrapfs_lower_file(file);
 	err = vfs_write(lower_file, buf, count, ppos);
